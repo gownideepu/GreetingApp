@@ -7,11 +7,10 @@ import jakarta.persistence.Id;
 import org.yaml.snakeyaml.events.Event;
 @Entity
 public class MyModel {
-
     public MyModel(MyDto myDto) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.greeting = greeting;
+        this.firstName = myDto.firstName;
+        this.lastName = myDto.lastName;
+        this.greeting = myDto.greeting;
     }
 
     public String getFirstName() {
