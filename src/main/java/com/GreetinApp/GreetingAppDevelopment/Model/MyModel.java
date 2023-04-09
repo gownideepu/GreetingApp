@@ -1,11 +1,18 @@
 package com.GreetinApp.GreetingAppDevelopment.Model;
 
 import com.GreetinApp.GreetingAppDevelopment.DTO.MyDto;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import org.yaml.snakeyaml.events.Event;
-
+@Entity
 public class MyModel {
+
+    public MyModel(MyDto myDto) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.greeting = greeting;
+    }
 
     public String getFirstName() {
         return firstName;
