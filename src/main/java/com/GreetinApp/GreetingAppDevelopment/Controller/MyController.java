@@ -4,6 +4,7 @@ import com.GreetinApp.GreetingAppDevelopment.DTO.MyDto;
 import com.GreetinApp.GreetingAppDevelopment.Model.MyModel;
 import com.GreetinApp.GreetingAppDevelopment.Repository.MyRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@Service
 public class MyController {
     @Autowired
     private MyRepo myRepo;
@@ -19,8 +21,15 @@ public class MyController {
         myRepo.findAll().forEach(datas ->data.add(datas));
         return data;
     }
-    public void save(MyModel data){
-        myRepo.save(data);
+    @PutMapping("/put/{id}")
+    public MyModel update(@RequestBody MyDto myDto,@PathVariable long id){
+        Optional<MyModel>data=myRepo.findById(id);
+        if (data.isPresent()){
+            data.get().setFirstName(myDto.firstName);
+            data.get().setLastName(myDto.lastName);
+            data.get().setGreeting(myDto.greeting);
+        }
+        return null;
     }
     @GetMapping("/get")
     public List<MyModel>getall(){
