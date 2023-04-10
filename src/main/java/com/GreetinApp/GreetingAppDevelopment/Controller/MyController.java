@@ -31,6 +31,15 @@ public class MyController {
         }
         return null;
     }
+    @DeleteMapping("/delete/{id}")
+    public String delete(@PathVariable long id){
+        Optional<MyModel> data=myRepo.findById(id);
+        if(data.isPresent()){
+            myRepo.deleteById(id);
+            return "deleting is done" +id;
+        }
+        return null;
+    }
     @GetMapping("/get")
     public List<MyModel>getall(){
         return getalldata();
